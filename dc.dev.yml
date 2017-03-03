@@ -1,0 +1,24 @@
+version: '2'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: df.dev
+    image: deb:dev
+    depends_on:
+      - db
+    container_name: dev.backend
+    environment:
+      NODE_ENV: "development"
+    volumes:
+      - ".:/home/deb/app"
+    ports:
+      - "3100:3000"
+      - "56745:56745"
+    entrypoint: ["npm", "run", "debug"]
+  db:
+    image: mongo:3.4
+    environment:
+      name: telebot-money
+    volumes:
+      - /data/db

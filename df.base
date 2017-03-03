@@ -1,0 +1,6 @@
+FROM node:4.4.5
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install --production
+RUN mkdir -p /home/deb && cp -a /tmp/node_modules /home/deb/
+ADD package.json /home/deb/package.json
+WORKDIR /home/deb
